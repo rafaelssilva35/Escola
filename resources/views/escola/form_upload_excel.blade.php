@@ -4,11 +4,11 @@
 
 @section('content')
 <div class="content">
-	<form method="POST" action="file" enctype="multipart/form-data">
+	<form method="POST" action="{{ url('/file') }}" enctype="multipart/form-data">
+	    {{ csrf_field() }}
 		<div class="row">
 
 			<div class=" col-md-3">
-			    {{ csrf_field() }}
 				<div >
 					<label for="gestor">Gestor</label>
 					<input type="file" class="form-control-file" id="gestor" type="file" name="gestor">

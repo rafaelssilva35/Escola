@@ -10,9 +10,9 @@ class Imovel extends Model
     protected $primaryKey = 'id_imovel';
     public  $timestamps   = false;
 
-    public static function setGestor($arrayGestor)
-    {    	
-    	$gestor = new Gestor();
+    public static function setImovel($arrayGestor)
+    {
+    	$gestor = new Imovel();
     	$gestor->codigo = $arrayGestor->codigo;
     	$gestor->codigo_mae = $arrayGestor->codigo_mae;
     	$gestor->regional = $arrayGestor->regional;

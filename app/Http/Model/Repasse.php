@@ -10,9 +10,9 @@ class Repasse extends Model
     protected $primaryKey = 'id_repasse';
     public  $timestamps   = false;
 
-    public static function setGestor($arrayGestor)
+    public static function setRepasse($arrayGestor)
     {    	
-    	$gestor = new Gestor();
+    	$gestor = new Repasse();
     	$gestor->codigo_imovel = $arrayGestor->codigo_imovel;
     	$gestor->tipo_repasse = $arrayGestor->tipo_repasse;
     	$gestor->codigo_caixa_escolar = $arrayGestor->codigo_caixa_escolar;

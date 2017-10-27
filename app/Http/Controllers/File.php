@@ -3,14 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use App\Http\Requests;
+use App\Http\Model\Gestor;
+use App\Http\Model\Imovel;
+use App\Http\Model\Repasse;
+use App\Http\Model\Terceirizado;
 
-use App\Http\Requests;
 
 class File extends Controller
 {
-    public function getFile($Requests)
+    public function setFile(Request $requests)
     {
+    	\Excel::load($requests->file('gestor'), function($reader){
+    		
+		});  
 
+		// \Excel::load($requests->file('imovel'), function($reader){
+		// 	$reader->each(function($arrayDados)
+		// 	{	
+		// 		Imovel::setImovel($arrayDados);
+	 //        });
+	        
+		// });  
+
+		\Excel::load($requests->file('repasses'), function($reader){
+    		$reader->each(function($arrayDados)
+			{	
+				Repasse::setRepasse($arrayDados);
+	        }); 		
+		});  
+
+		// \Excel::load($requests->file('terceirizados'), function($reader){
+  //   		$reader->each(function($arrayDados)
+		// 	{	
+		// 		Terceirizado::setTerceirizado($arrayDados);
+	 //        });   		
+		// });
     }
 
     public function formFileUpload()

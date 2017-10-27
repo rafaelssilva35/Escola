@@ -4,15 +4,15 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gestor extends Model
+class Terceirizado extends Model
 {
     protected $table      = 'terceirizados';
     protected $primaryKey = 'id_terceirizado';
     public  $timestamps   = false;
 
-    public static function setGestor($arrayGestor)
+    public static function setTerceirizado($arrayGestor)
     {    	
-    	$gestor = new Gestor();
+    	$gestor = new Terceirizado();
     	$gestor->codigo_imovel = $arrayGestor->codigo_imovel;
     	$gestor->tipo = $arrayGestor->tipo;
     	$gestor->posto_trabalho = $arrayGestor->posto_trabalho;

@@ -8,8 +8,9 @@ class Excel extends Controller
 {
     public static function loadExcel($fileExcel)
     {    	
-    	$dados = "";
-    	return \Excel::load($fileExcel->file('excel'), function($reader){
+        $dados = "";
+        return \Excel::load($fileExcel->file('gestor'), function($reader){
+            return ($reader);
     		
 		});
 		// return $dadsos;
