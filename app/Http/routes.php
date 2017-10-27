@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', 'Home@index');
+Route::post('/excel', 'Excel@loadExcel');
+Route::post('/gestor', 'Gestor@createGestor');
