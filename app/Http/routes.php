@@ -19,3 +19,4 @@ Route::get('/', 'Home@index');
 Route::post('/excel', 'Excel@loadExcel');
 Route::post('/file', 'File@setFile');
 Route::get('/file/form', 'File@formFileUpload');
+Route::get('/imoveis', 'Imovel@listaImoveis');

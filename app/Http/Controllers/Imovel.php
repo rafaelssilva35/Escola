@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Model\Imovel as MImovel;
 
 class Imovel extends Controller
 {
@@ -15,5 +15,11 @@ class Imovel extends Controller
 		{	
 			MGestor::setGestor($arrayDados);
 		});
-    }
+	}
+	
+	public function listaImoveis()
+	{
+		dd(MImovel::getImovel());
+		return view();
+	}
 }

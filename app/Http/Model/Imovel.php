@@ -44,5 +44,25 @@ class Imovel extends Model
     	$gestor->anos_inicais_presencial = $arrayGestor->anos_inicais_presencial;
     	$gestor->educacao_profissional_ead = $arrayGestor->educacao_profissional_ead;
     	$gestor->save();
-    }
+	}
+	
+	public function hasGestor()
+	{
+		return $this->hasMany('App\Http\Model\Gestor', 'codigo_imovel', 'codigo');
+	}
+
+	public function hasRepasse()
+	{
+		return $this->hasMany('App\Http\Model\Repasse', 'codigo_imovel', 'codigo');
+	}
+
+	public function hasTerceirizado()
+	{
+		return $this->hasMany('App\Http\Model\Terceirizado', 'codigo_imovel', 'codigo');
+	}
+
+	public static function getImovel()
+	{
+		return self::with('hasGestor', 'hasRepasse', 'hasTerceirizado')->get();
+	}
 }
