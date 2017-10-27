@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Route::get('/', 'Home@index');
 Route::post('/excel', 'Excel@loadExcel');
-Route::post('/gestor', 'Gestor@createGestor');
+Route::post('/file', 'Gestor@createGestor');
+Route::get('/file/form', 'File@formFileUpload');
