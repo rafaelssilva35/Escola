@@ -8,5 +8,5 @@ use App\Http\Requests;
 
 class Escola extends Controller
 {
-    //
+    return view('escola/index');
 }

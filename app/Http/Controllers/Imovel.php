@@ -17,9 +17,15 @@ class Imovel extends Controller
 		});
 	}
 	
-	public function listaImoveis()
+	public function exibEscola()
 	{
-		dd(MImovel::getImovel());
-		return view();
+		return view('escola.escola');
+	}
+
+	public function listaImoveis(Request $request)
+	{
+		if ($request->ajax()) {
+			return MImovel::getImovel();
+		}
 	}
 }
