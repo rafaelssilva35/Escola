@@ -1,3 +1,3 @@
 <?php
 
-// Route::get('/imovel/{id}', 'Imovel@listaImoveis');
+Route::get('/imovel/{id}', 'Imovel@listaImoveis');

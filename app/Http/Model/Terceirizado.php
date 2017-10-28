@@ -27,14 +27,13 @@ class Terceirizado extends Model
         try {
             $total = "";
             $result = self::where('codigo_imovel', $idImovel)->where('tipo', $tipo)->get();
-
             foreach ($result as $calcular) {
                 $total += $calcular->quantidade * $calcular->valor_unitario;
             }
             $result = ['tipo' => $tipo, 'total' => $total];
             return !empty($total) ? $result : null;
         } catch (Exception $e) {
-            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+            echo 'Erro: ',  $e->getMessage(), "\n";
         }
     }
 }

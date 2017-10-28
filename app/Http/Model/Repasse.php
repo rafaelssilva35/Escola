@@ -34,4 +34,19 @@ class Repasse extends Model
             echo 'Algum arquivo com campo errado: Repasse<br>';
         }  
     }
+
+    public static function somaRepasse($idImovel, $tipo)
+    {
+        try {
+            $total = "";
+            $result = self::where('codigo_imovel', $idImovel)->where('tipo_repasse', $tipo)->get();
+            foreach ($result as $calcular) {
+                $total += $calcular->valor;
+            }
+            $result = ['tipo' => $tipo, 'total' => $total];
+            return !empty($total) ? $result : null;
+        } catch (Exception $e) {
+            echo 'Erro: ',  $e->getMessage(), "\n";
+        }
+    }
 }
