@@ -13,6 +13,7 @@ class File extends Controller
 {
     public function setFile(Request $requests)
     {
+	    return redirect('/');
     	\Excel::load($requests->file('gestor'), function($reader){
 			$reader->each(function($arrayDados)
 			{					
@@ -41,6 +42,7 @@ class File extends Controller
 				Terceirizado::setTerceirizado($arrayDados->toArray());
 	        });   		
 		});
+
     }
 
     public function formFileUpload()
