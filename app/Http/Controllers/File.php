@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Http\Requests;
 use App\Http\Model\Gestor;
 use App\Http\Model\Imovel;
 use App\Http\Model\Repasse;
@@ -16,29 +15,30 @@ class File extends Controller
     {
     	\Excel::load($requests->file('gestor'), function($reader){
 			$reader->each(function($arrayDados)
-			{	
+			{					
 				Gestor::setGestor($arrayDados);
+
 	        });
 		});  
 
 		\Excel::load($requests->file('imovel'), function($reader){
 			$reader->each(function($arrayDados)
-			{	
-				Imovel::setImovel($arrayDados);
+			{
+				Imovel::setImovel($arrayDados->toArray());
 	        });	        
 		});  
 
 		\Excel::load($requests->file('repasses'), function($reader){
     		$reader->each(function($arrayDados)
 			{	
-				Repasse::setRepasse($arrayDados);
+				Repasse::setRepasse($arrayDados->toArray());
 	        }); 		
 		});  
 
 		\Excel::load($requests->file('terceirizados'), function($reader){
     		$reader->each(function($arrayDados)
 			{	
-				Terceirizado::setTerceirizado($arrayDados);
+				Terceirizado::setTerceirizado($arrayDados->toArray());
 	        });   		
 		});
     }

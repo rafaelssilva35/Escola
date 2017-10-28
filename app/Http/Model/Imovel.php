@@ -8,42 +8,50 @@ class Imovel extends Model
 {
     protected $table      = 'imovel';
     protected $primaryKey = 'id_imovel';
+    protected $fillable   = 
+    [
+        'codigo',
+        'codigo_mae',
+        'regional',
+        'cidade',
+        'inep',
+        'anexo',
+        'descricao',
+        'modalidade',
+        'situacao',
+        'educacao_infantil_presencial',
+        'anos_finais_presencial',
+        'ensino_medio_presencial',
+        'educacao_profissional_presencial',
+        'eja_presencial',
+        'eja_semipresencial',
+        'magisterio_ead',
+        'eja_ead',
+        'educacao_presencial_ead',
+        'total_escolarizacao',
+        'cep',
+        'logradouro',
+        'numero',
+        'bairro',
+        'data_cadastro',
+        'bairro',
+        'ultima_atualizacao',
+        'latitude',
+        'longitude',
+        'anos_inicais_presencial',
+        'educacao_profissional_ead'
+    ];
     public  $timestamps   = false;
 
     public static function setImovel($arrayGestor)
     {
-    	$gestor = new Imovel();
-    	$gestor->codigo = $arrayGestor->codigo;
-    	$gestor->codigo_mae = $arrayGestor->codigo_mae;
-    	$gestor->regional = $arrayGestor->regional;
-    	$gestor->cidade = $arrayGestor->cidade;
-    	$gestor->inep = $arrayGestor->inep;
-    	$gestor->anexo = $arrayGestor->anexo;
-    	$gestor->descricao = $arrayGestor->descricao;
-    	$gestor->modalidade = $arrayGestor->modalidade;
-    	$gestor->situacao = $arrayGestor->situacao;
-    	$gestor->educacao_infantil_presencial = $arrayGestor->educacao_infantil_presencial;
-    	$gestor->anos_finais_presencial = $arrayGestor->anos_finais_presencial;
-    	$gestor->ensino_medio_presencial = $arrayGestor->ensino_medio_presencial;
-    	$gestor->educacao_profissional_presencial = $arrayGestor->educacao_profissional_presencial;
-    	$gestor->eja_presencial = $arrayGestor->eja_presencial;
-    	$gestor->eja_semipresencial = $arrayGestor->eja_semipresencial;
-    	$gestor->magisterio_ead = $arrayGestor->magisterio_ead;
-    	$gestor->eja_ead = $arrayGestor->eja_ead;
-    	$gestor->educacao_presencial_ead = $arrayGestor->educacao_presencial_ead;
-    	$gestor->total_escolarizacao = $arrayGestor->total_escolarizacao;
-    	$gestor->cep = $arrayGestor->cep;
-    	$gestor->logradouro = $arrayGestor->logradouro;
-    	$gestor->numero = $arrayGestor->numero;
-    	$gestor->bairro = $arrayGestor->bairro;
-    	$gestor->data_cadastro = $arrayGestor->data_cadastro;
-    	$gestor->bairro = $arrayGestor->bairro;
-    	$gestor->ultima_atualizacao = $arrayGestor->ultima_atualizacao;
-    	$gestor->latitude = $arrayGestor->latitude;
-    	$gestor->longitude = $arrayGestor->longitude;
-    	$gestor->anos_inicais_presencial = $arrayGestor->anos_inicais_presencial;
-    	$gestor->educacao_profissional_ead = $arrayGestor->educacao_profissional_ead;
-    	$gestor->save();
+        try {
+            $imovel = new Imovel();
+            $imovel->fill($arrayGestor);        
+            $imovel->save();
+        } catch (\PDOException $e) {
+            echo 'Algum arquivo com campo errado: Imovel<br>';
+        }  
 	}
 	
 	public function hasGestor()
@@ -63,6 +71,6 @@ class Imovel extends Model
 
 	public static function getImovel()
 	{
-		return self::with('hasGestor', 'hasRepasse', 'hasTerceirizado')->get();
+		return self::with('hasGestor', 'hasRepasse', 'hasTerceirizado');
 	}
 }

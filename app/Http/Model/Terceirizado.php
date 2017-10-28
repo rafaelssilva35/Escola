@@ -8,16 +8,33 @@ class Terceirizado extends Model
 {
     protected $table      = 'terceirizados';
     protected $primaryKey = 'id_terceirizado';
+    protected $fillable   = ['codigo_imovel','tipo','posto_trabalho','quantidade','valor_unitario'];
     public  $timestamps   = false;
 
     public static function setTerceirizado($arrayGestor)
     {    	
-    	$gestor = new Terceirizado();
-    	$gestor->codigo_imovel = $arrayGestor->codigo_imovel;
-    	$gestor->tipo = $arrayGestor->tipo;
-    	$gestor->posto_trabalho = $arrayGestor->posto_trabalho;
-    	$gestor->quantidade = $arrayGestor->quantidade;
-    	$gestor->valor_unitario = $arrayGestor->valor_unitario;
-    	$gestor->save();
+        try {
+            $gestor = new Terceirizado();
+            $gestor->fill($arrayGestor);
+            $gestor->save();
+        } catch (\PDOException $e) {
+            echo 'Algum arquivo com campo errado: Terceirizados<br>';
+        }    	
+    }
+
+    public static function somaCustoTerceirizado($idImovel, $tipo)
+    {
+        try {
+            $total = "";
+            $result = self::where('codigo_imovel', $idImovel)->where('tipo', $tipo)->get();
+
+            foreach ($result as $calcular) {
+                $total += $calcular->quantidade * $calcular->valor_unitario;
+            }
+            $result = ['tipo' => $tipo, 'total' => $total];
+            return !empty($total) ? $result : null;
+        } catch (Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
     }
 }

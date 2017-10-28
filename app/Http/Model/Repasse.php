@@ -8,22 +8,30 @@ class Repasse extends Model
 {
     protected $table      = 'repasses';
     protected $primaryKey = 'id_repasse';
+    protected $fillable   = 
+    [
+        'codigo_imovel',
+        'tipo_repasse',
+        'codigo_caixa_escolar',
+        'ano_parcela',
+        'nivel_ensino',
+        'etapa_ensino',
+        'descricao_repasse',
+        'numero_parcela',
+        'valor',
+        'numero_processo',
+        'ano_processo',
+    ];
     public  $timestamps   = false;
 
     public static function setRepasse($arrayGestor)
-    {    	
-    	$gestor = new Repasse();
-    	$gestor->codigo_imovel = $arrayGestor->codigo_imovel;
-    	$gestor->tipo_repasse = $arrayGestor->tipo_repasse;
-    	$gestor->codigo_caixa_escolar = $arrayGestor->codigo_caixa_escolar;
-    	$gestor->ano_parcela = $arrayGestor->ano_parcela;
-    	$gestor->nivel_ensino = $arrayGestor->nivel_ensino;
-    	$gestor->etapa_ensino = $arrayGestor->etapa_ensino;
-    	$gestor->descricao_repasse = $arrayGestor->descricao_repasse;
-    	$gestor->numero_parcela = $arrayGestor->numero_parcela;
-    	$gestor->valor = $arrayGestor->valor;
-    	$gestor->numero_processo = $arrayGestor->numero_processo;
-    	$gestor->ano_processo = $arrayGestor->ano_processo;
-    	$gestor->save();
+    {
+        try {
+            $repasse = new Repasse();
+            $repasse->fill($arrayGestor);
+            $repasse->save();
+        } catch (\PDOException $e) {
+            echo 'Algum arquivo com campo errado: Repasse<br>';
+        }  
     }
 }

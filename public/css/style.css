@@ -7,3 +7,12 @@ body {
     padding-top: 56px;
   }
 }
+
+.green {
+	color: #029604;
+	font-weight: bold;
+}
+.blue {
+	color: #007bff;
+	font-weight: bold;
+}
