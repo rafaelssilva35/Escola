@@ -25,9 +25,12 @@ class Terceirizado extends Model
     public static function somaCustoTerceirizado($idImovel, $tipo)
     {
         try {
-            $total = "";
+            $total = 0;
             $result = self::where('codigo_imovel', $idImovel)->where('tipo', $tipo)->get();
             foreach ($result as $calcular) {
+                // var_dump((double) $calcular->quantidade);
+                // echo "<br>";
+                // var_dump((double) $calcular->valor_unitario);
                 $total += $calcular->quantidade * $calcular->valor_unitario;
             }
             $result = ['tipo' => $tipo, 'total' => $total];

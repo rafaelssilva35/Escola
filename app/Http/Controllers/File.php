@@ -13,36 +13,36 @@ class File extends Controller
 {
     public function setFile(Request $requests)
     {
+        \Excel::load($requests->file('gestor'), function($reader){
+            $reader->each(function($arrayDados)
+            {                   
+                Gestor::setGestor($arrayDados);
+
+            });
+        });  
+
+        \Excel::load($requests->file('imovel'), function($reader){
+            $reader->each(function($arrayDados)
+            {
+                Imovel::setImovel($arrayDados->toArray());
+            });         
+        });  
+
+        \Excel::load($requests->file('repasses'), function($reader){
+            $reader->each(function($arrayDados)
+            {   
+                Repasse::setRepasse($arrayDados->toArray());
+            });         
+        });  
+
+        \Excel::load($requests->file('terceirizados'), function($reader){
+            $reader->each(function($arrayDados)
+            {   
+                Terceirizado::setTerceirizado($arrayDados->toArray());
+            });         
+        });
+
 	    return redirect('/');
-    	\Excel::load($requests->file('gestor'), function($reader){
-			$reader->each(function($arrayDados)
-			{					
-				Gestor::setGestor($arrayDados);
-
-	        });
-		});  
-
-		\Excel::load($requests->file('imovel'), function($reader){
-			$reader->each(function($arrayDados)
-			{
-				Imovel::setImovel($arrayDados->toArray());
-	        });	        
-		});  
-
-		\Excel::load($requests->file('repasses'), function($reader){
-    		$reader->each(function($arrayDados)
-			{	
-				Repasse::setRepasse($arrayDados->toArray());
-	        }); 		
-		});  
-
-		\Excel::load($requests->file('terceirizados'), function($reader){
-    		$reader->each(function($arrayDados)
-			{	
-				Terceirizado::setTerceirizado($arrayDados->toArray());
-	        });   		
-		});
-
     }
 
     public function formFileUpload()

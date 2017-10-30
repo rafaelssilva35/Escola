@@ -38,7 +38,7 @@ class Repasse extends Model
     public static function somaRepasse($idImovel, $tipo)
     {
         try {
-            $total = "";
+            $total = 0;
             $result = self::where('codigo_imovel', $idImovel)->where('tipo_repasse', $tipo)->get();
             foreach ($result as $calcular) {
                 $total += $calcular->valor;
